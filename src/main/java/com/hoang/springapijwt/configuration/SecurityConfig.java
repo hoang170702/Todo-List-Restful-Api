@@ -50,6 +50,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize
                                 .requestMatchers("/api/user/**").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers("/api/user/**").hasAnyAuthority("ROLE_ADMIN")
                                 .requestMatchers("/api/random").hasAnyAuthority("ROLE_USER")
                                 .requestMatchers("/api/login").permitAll()
                                 .anyRequest().permitAll()
