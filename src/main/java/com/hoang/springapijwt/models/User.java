@@ -1,5 +1,6 @@
 package com.hoang.springapijwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -35,7 +36,7 @@ public class User {
     )
     private Set<Role> roles;
 
-    @Nullable
+    @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<Todo> todos;
 

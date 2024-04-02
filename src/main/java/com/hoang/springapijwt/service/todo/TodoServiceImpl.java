@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -20,17 +21,16 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<Todo> getAllToto() {
-        return todoRepository.findAll();
+    public List<Todo> getAllToto(int userId) {
+        return todoRepository.findAllByUserId(userId);
     }
 
     @Override
-    public Todo update(int id, Todo todo) {
+    public Todo update(Todo todo) {
         try {
-            Todo exitTodo = todoRepository.findById(id).get();
+            Todo exitTodo = todoRepository.findById(todo.getId()).get();
             if (exitTodo != null) {
                 exitTodo.setTitle(todo.getTitle());
-                exitTodo.setContent(todo.getContent());
                 if (!todo.getImgUrl().isEmpty()) {
                     exitTodo.setImgUrl(todo.getImgUrl());
                 }
@@ -48,6 +48,16 @@ public class TodoServiceImpl implements TodoService {
             todoRepository.deleteById(id);
         } catch (Exception ex) {
             log.error(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Optional<Todo> get(int id) {
+        try {
+            return todoRepository.findById(id);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            return null;
         }
     }
 }

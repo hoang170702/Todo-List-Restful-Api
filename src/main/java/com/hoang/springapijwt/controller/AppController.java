@@ -37,7 +37,7 @@ public class AppController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtTokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
             log.info("login success");
-            return ResponseEntity.status(HttpStatus.OK).body(jwt);
+            return ResponseEntity.status(HttpStatus.OK).body("bearer token: "+jwt);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());

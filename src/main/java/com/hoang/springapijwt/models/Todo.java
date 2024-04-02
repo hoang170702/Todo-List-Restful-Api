@@ -16,10 +16,11 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private String content;
     private String imgUrl;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
+
+
 }
